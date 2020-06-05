@@ -1,0 +1,157 @@
+<h4>Formularios <small> tipo </small></h4>
+<hr>
+<form
+  autocomplete="off"
+  (ngSubmit)="guardar(forma)"
+  #forma="ngForm"
+>
+  <!--al hacer esto #forma="ngForm" creamos un alias para q coja todas las caracteristicas q tiene angular con los formularios-->
+
+  <div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Nombre</label>
+      <div class="col-8">
+
+        <input
+          class="form-control"
+          [class.is-invalid]="nombreInput.invalid && nombreInput.touched"
+          type="text"
+          placeholder="Nombre"
+          [ngModel]="usuario.nombre"
+          ngModel
+          name="nombre"
+          required
+          minlength="5"
+          #nombreInput="ngModel"
+        >
+        <!--el ngMOdel se pone para q al momento de tener las caracteristicas del ngForm sea mostrado dentro del mismo este input...
+        [ngModel]="usuario.nombre" si lo pondemos asi es el valor q por defecto traera ese inout-->
+        <small
+          *ngIf="nombreInput.invalid && nombreInput.touched"
+          class="form-text text-danger"
+        >Ingrese al menos 5 letras</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Apellido</label>
+      <div class="col-8">
+
+        <input
+          class="form-control"
+          [class.is-invalid]="apellidoInput.invalid && apellidoInput.touched"
+          type="text"
+          placeholder="Apellido"
+          ngModel
+          name="apellido"
+          required
+          minlength="5"
+          #apellidoInput="ngModel"
+        >
+        <small
+          *ngIf="apellidoInput.invalid && apellidoInput.touched"
+          class="form-text text-danger"
+        >Ingrese al menos 5 letras</small>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Correo</label>
+    <div class="col-8">
+
+      <input
+        class="form-control"
+        [class.is-invalid]="emailInput.invalid && emailInput.touched"
+        type="email"
+        ngModel
+        placeholder="Correo electrónico"
+        name="correo"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+        #emailInput="ngModel"
+        required
+      >
+      <small
+        *ngIf="emailInput.invalid && emailInput.touched"
+        class="form-text text-danger"
+      >Ingrese un correo valido</small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Pais</label>
+    <div class="col-8">
+      <select
+        class="form-control"
+        [class.is-invalid]="paisInput.invalid && paisInput.touched"
+        name="pais"
+        [disabled]="paises.length === 0"
+        [ngModel]="usuario.pais"
+        required
+        #paisInput="ngModel"
+      >
+        <option
+          *ngFor="let pais of paises"
+          [value]="pais.codigo"
+        >{{pais.nombre}}</option>
+        <small
+          *ngIf="paisInput.invalid && paisInput.touched"
+          class="form-text text-danger"
+        >Ingrese un correo valido</small>
+      </select>
+
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Genero</label>
+    <div class="col-8">
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          [class.is-invalid]="generoInput.invalid && generoInput.touched"
+          type="radio"
+          ngModel
+          value="masculino"
+          required
+          name="genero"
+          #generoInput="ngModel"
+        >
+        <label class="form-check-label">Masculino</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          [class.is-invalid]="generoInput.invalid && generoInput.touched"
+          type="radio"
+          ngModel
+          value="femenino"
+          required
+          name="genero"
+          #generoInput="ngModel"
+        >
+        <label class="form-check-label">Femenino</label>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button
+        type="submit"
+        class="btn btn-outline-primary btn-block"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</form>
