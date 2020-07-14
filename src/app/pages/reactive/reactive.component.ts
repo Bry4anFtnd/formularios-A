@@ -31,6 +31,7 @@ export class ReactiveComponent implements OnInit {
   get nombreNoValido() {
     return this.forma.get('nombre').invalid && this.forma.get('nombre').touched;
     // todas estas funciones me devuelven un booleano q en el html lo va a evaluar a ver si hay un errror
+    // osea si todas esas validaciones son verdadera es comosi retornara true y me marca la clase invalida en el html
   }
 
   get apellidoNoValido() {
